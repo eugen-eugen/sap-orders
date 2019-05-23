@@ -1,97 +1,45 @@
-<mvc:View
-	controllerName="moldawski.Orders.controller.Master"
-	xmlns="sap.m"
-	xmlns:semantic="sap.f.semantic"
-	xmlns:mvc="sap.ui.core.mvc">
+<mvc:View xmlns="sap.m" xmlns:semantic="sap.f.semantic" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" controllerName="moldawski.Orders.controller.Master">
 
-	<semantic:SemanticPage
-		id="masterPage"
-		preserveHeaderStateOnScroll="true"
-		toggleHeaderOnTitleClick="false">
-		<semantic:titleHeading>
-			<Title
-				id="masterPageTitle"
-				text="{masterView>/title}"/>
-		</semantic:titleHeading>
+	<semantic:SemanticPage id="masterPage" preserveHeaderStateOnScroll="true" toggleHeaderOnTitleClick="false">
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
-			<List
-				id="list"
-				width="auto"
-				class="sapFDynamicPageAlignContent"
-				items="{
-					path: '/SalesOrderSet',
-					sorter: {
-						path: 'CustomerName',
-						descending: false
-					},
-					groupHeaderFactory: '.createGroupHeader'
-				}"
-				busyIndicatorDelay="{masterView>/delay}"
-				noDataText="{masterView>/noDataText}"
-				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished=".onUpdateFinished"
-				selectionChange=".onSelectionChange">
+			<List id="list" width="auto" class="sapFDynamicPageAlignContent" items="{      path: '/SalesOrderSet',      sorter: {       path: 'CustomerName',       descending: false      },      groupHeaderFactory: '.createGroupHeader'     }" busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
 				<infoToolbar>
-					<Toolbar
-						active="true"
-						id="filterBar"
-						visible="{masterView>/isFilterBarVisible}"
-						press=".onOpenViewSettings">
-						<Title
-							id="filterBarLabel"
-							text="{masterView>/filterBarLabel}" />
+					<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press=".onOpenViewSettings">
+						<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
 					</Toolbar>
 				</infoToolbar>
 				<headerToolbar>
 					<OverflowToolbar>
-						<SearchField
-							id="searchField"
-							showRefreshButton="true"
-							tooltip="{i18n>masterSearchTooltip}"
-							search=".onSearch"
-							width="auto">
+						<SearchField id="searchField" showRefreshButton="true" tooltip="{i18n>masterSearchTooltip}" search=".onSearch" width="auto">
 							<layoutData>
-								<OverflowToolbarLayoutData
-									minWidth="150px"
-									maxWidth="240px"
-									shrinkable="true"
-									priority="NeverOverflow"/>
+								<OverflowToolbarLayoutData minWidth="150px" maxWidth="240px" shrinkable="true" priority="NeverOverflow"/>
 							</layoutData>
 						</SearchField>
 						<ToolbarSpacer/>
-						<Button
-							id="sortButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://sort"
-							type="Transparent"/>
-						<Button
-							id="filterButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://filter"
-							type="Transparent"/>
-						<Button
-							id="groupButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://group-2"
-							type="Transparent"/>
+						<Button id="sortButton" press=".onOpenViewSettings" icon="sap-icon://sort" type="Transparent"/>
+						<Button id="filterButton" press=".onOpenViewSettings" icon="sap-icon://filter" type="Transparent"/>
+						<Button id="groupButton" press=".onOpenViewSettings" icon="sap-icon://group-2" type="Transparent"/>
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
-					<ObjectListItem
-						type="Navigation"
-						press=".onSelectionChange"
-						title="{CustomerName}"
-						number="{
-							path: 'NetAmount',
-							formatter: '.formatter.currencyValue'
-						}"
-						numberUnit="{CurrencyCode}">
+					<ObjectListItem type="Navigation" press=".onSelectionChange" title="{CustomerName}" number="{        path: 'NetAmount',        formatter: '.formatter.currencyValue'       }" numberUnit="{CurrencyCode}">
 					</ObjectListItem>
 				</items>
 			</List>
 		</semantic:content>
+	<semantic:titleHeading>
+	    <HBox width="100%" id="hbox0">
+	        <items>
+	        	<f:Avatar src="images/interseroh-logo.jpg" displaySize="L" imageFitType="Contain" class="sapUiSmallMarginEnd"/>
+	            <VBox width="100%" direction="Column" id="vbox0">
+	                <items>
+	                    <Title xmlns="sap.m" text="UI5 Air Cargo" id="title0" level="H1" titleStyle="H6"/>
+	                    <Text xmlns="sap.m" text="You waste, we care" id="text4"/>
+	                </items>
+	            </VBox>
+	        </items>
+	    </HBox>
+	</semantic:titleHeading>
 	</semantic:SemanticPage>
 </mvc:View>

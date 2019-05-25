@@ -15,6 +15,13 @@ sap.ui.define([], function () {
 			}
 
 			return parseFloat(sValue).toFixed(2);
+		},
+		dateValue : function (sValue) {
+			if (!sValue) {
+				return "";
+			}
+
+			return sValue.getDate().toLocaleString();
 		}
 	};
 

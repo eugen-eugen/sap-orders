@@ -49,11 +49,14 @@
 			"id": "app"
 		},
 		"dependencies": {
-			"minUI5Version": "1.42.0",
+			"minUI5Version": "1.60.0",
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
-				"sap.f": {}
+				"sap.f": {},
+				"sap.uxap": {},
+				"sap.tnt": {},
+				"sap.suite.ui.commons": {}
 			}
 		},
 		"contentDensities": {
@@ -94,7 +97,7 @@
 				"target": ["master", "object"]
 			}, {
 				"name": "Info",
-				"pattern": "Info",
+				"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
 				"target": ["master", "object", "Info"]
 			}],
 			"targets": {

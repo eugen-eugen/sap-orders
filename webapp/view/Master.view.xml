@@ -4,7 +4,7 @@
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
 			<List id="list" width="auto" class="sapFDynamicPageAlignContent"
-				items="{ path: '/SalesOrderSet', sorter: { path: 'CreatedAt', descending: true }, 
+				items="{ path: '/SalesOrderSet', sorter: { path: 'CreatedAt', descending: false }, 
 				
 				parameters: {
 						'expand': 'ToBusinessPartner'
@@ -42,6 +42,7 @@
 						}" />
 
 					<ObjectAttribute text="{ToBusinessPartner/BusinessPartnerID}"/>
+					<ObjectAttribute text="{SalesOrderID}"/>
 					<firstStatus>
 						 <ObjectStatus
 							  title ="{ToBusinessPartner/Address/Country}"

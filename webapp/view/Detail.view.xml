@@ -1,5 +1,7 @@
 <mvc:View xmlns="sap.m" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt"
-	xmlns:si="sap.suite.ui.commons.statusindicator" controllerName="moldawski.Orders.controller.Detail">
+	xmlns:si="sap.suite.ui.commons.statusindicator" controllerName="moldawski.Orders.controller.Detail"
+	xmlns:l="sap.ui.layout"
+	xmlns:control="moldawski.Orders.control">
 	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}" showFooter="true">
 		<semantic:titleHeading>
 			<Title text="{CustomerName}"/>
@@ -9,55 +11,61 @@
 			<tnt:InfoLabel text="{LifecycleStatusDescription}" colorScheme="{ path: 'LifecycleStatus', formatter: '.formatter.deliveryStatus' }"/>
 		</semantic:headerContent>
 		<semantic:content>
-			<Table xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="lineItemsList" width="auto" items="{ToLineItems}"
-				updateFinished=".onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}" selectionChange="action" mode="SingleSelectMaster"
-				action:wiring="\{'selectionChange':\{'navigation':\{'routeName':'Info'\}\}\}" sticky="ColumnHeaders">
-				<headerToolbar>
-					<Toolbar>
-						<Title id="lineItemsTitle" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-					<Column>
-						<Text text="{i18n>detailLineItemTableIDQuantity}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>detailLineItemTableIDColumn}"/>
-					</Column>
-					<Column minScreenWidth="Tablet" demandPopin="true">
-						<Text text="{i18n>detailLineItemTableDeliveryDate}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>detailLineItemTableDeliveryUrgency}"/>
-					</Column>
-					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem selected="{= ${ItemPosition} === ${appView>/selectedItemId}}" type="Navigation">
-						<cells>
-							<ObjectNumber number="{Quantity}"/>
-							<ObjectIdentifier title="{ProductID}" text="{ItemPosition}"/>
-							<Text text="{ path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
-							<si:StatusIndicator id="statusIndicator" width="4.5rem" height="3.5rem"
-								value="{= (Date.parse(${DeliveryDate}) - Date.parse('2018-06-01T00:00:00.0000000')) / 52560000 }">
-								<si:ShapeGroup>
-									<si:LibraryShape id="customShape0" shapeId="cloud"/>
-								</si:ShapeGroup>
-								<si:propertyThresholds>
-									<si:PropertyThreshold fillColor="Error" toValue="50"/>
-									<si:PropertyThreshold fillColor="Critical" toValue="65"/>
-									<si:PropertyThreshold fillColor="Neutral" toValue="80"/>
-									<si:PropertyThreshold fillColor="Good" toValue="100"/>
-								</si:propertyThresholds>
-							</si:StatusIndicator>
-							<ObjectNumber number="{ path: 'NetAmount', formatter: '.formatter.currencyValue' }" unit="{CurrencyCode}"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
+			<l:VerticalLayout>
+				<control:OrderPreparations
+					id="orderPreparations"
+					confirm=".onConfirm">
+				</control:OrderPreparations>
+				<Table xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="lineItemsList" width="auto" items="{ToLineItems}"
+					updateFinished=".onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}" selectionChange="action" mode="SingleSelectMaster"
+					action:wiring="\{'selectionChange':\{'navigation':\{'routeName':'Info'\}\}\}" sticky="ColumnHeaders">
+					<headerToolbar>
+						<Toolbar>
+							<Title id="lineItemsTitle" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="{i18n>detailLineItemTableIDQuantity}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>detailLineItemTableIDColumn}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>detailLineItemTableDeliveryDate}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>detailLineItemTableDeliveryUrgency}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+							<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem selected="{= ${ItemPosition} === ${appView>/selectedItemId}}" type="Navigation">
+							<cells>
+								<ObjectNumber number="{Quantity}"/>
+								<ObjectIdentifier title="{ProductID}" text="{ItemPosition}"/>
+								<Text text="{ path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
+								<si:StatusIndicator id="statusIndicator" width="4.5rem" height="3.5rem"
+									value="{= (Date.parse(${DeliveryDate}) - Date.parse('2018-06-01T00:00:00.0000000')) / 52560000 }">
+									<si:ShapeGroup>
+										<si:LibraryShape id="customShape0" shapeId="cloud"/>
+									</si:ShapeGroup>
+									<si:propertyThresholds>
+										<si:PropertyThreshold fillColor="Error" toValue="50"/>
+										<si:PropertyThreshold fillColor="Critical" toValue="65"/>
+										<si:PropertyThreshold fillColor="Neutral" toValue="80"/>
+										<si:PropertyThreshold fillColor="Good" toValue="100"/>
+									</si:propertyThresholds>
+								</si:StatusIndicator>
+								<ObjectNumber number="{ path: 'NetAmount', formatter: '.formatter.currencyValue' }" unit="{CurrencyCode}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:VerticalLayout>
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->
 		<semantic:sendEmailAction>

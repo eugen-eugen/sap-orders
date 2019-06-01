@@ -47,8 +47,20 @@
         "name": "ES5"
       },
       "description": "SAP Gateway Demo System"
+    },
+    {
+      "path": "/apihub_sandbox",
+      "target": {
+        "type": "application",
+        "name": "webidecp",
+        "entryPath": "/destinations/apihub_sandbox"
+      },
+      "description": "SAP API Business Hub - Sandbox end point"
     }
   ],
   "welcomeFile": "/webapp/index.html",
-  "sendWelcomeFileRedirect": true
+  "sendWelcomeFileRedirect": true,
+  "headerWhiteList": [
+    "apiKey"
+  ]
 }

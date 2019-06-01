@@ -18,11 +18,18 @@
 					"odataVersion": "2.0",
 					"localUri": "localService/metadata.xml"
 				}
+			},
+			"Work_Centers": {
+				"uri": "/apihub_sandbox/s4hanacloud/sap/opu/odata/sap/API_WORK_CENTERS/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/Work_Centers/metadata.xml"
+				}
 			}
 		},
 		"sourceTemplate": {
-			"id": "sap.ui.ui5-template-plugin.2masterdetail",
-			"version": "1.60.13"
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
 		}
 	},
 	"sap.ui": {
@@ -76,6 +83,16 @@
 				"settings": {
 					"defaultBindingMode": "TwoWay"
 				}
+			},
+			"m1": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "Work_Centers",
+				"preload": true
 			}
 		},
 		"routing": {
@@ -90,25 +107,41 @@
 				},
 				"async": true
 			},
-			"routes": [{
-				"pattern": "",
-				"name": "master",
-				"target": "master"
-			}, {
-				"pattern": "SalesOrderSet/{objectId}",
-				"name": "object",
-				"target": ["master", "object"]
-			}, {
-				"name": "Info",
-				"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
-				"target": ["master", "object", "Info"]
-			}, {
-				"name": "create",
-				"pattern": "SalesOrderSet/{objectId}/create",
-				"titleTarget": "",
-				"greedy": false,
-				"target": ["master", "object", "Create"]
-			}],
+			"routes": [
+				{
+					"pattern": "",
+					"name": "master",
+					"target": "master"
+				},
+				{
+					"pattern": "SalesOrderSet/{objectId}",
+					"name": "object",
+					"target": [
+						"master",
+						"object"
+					]
+				},
+				{
+					"name": "Info",
+					"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
+					"target": [
+						"master",
+						"object",
+						"Info"
+					]
+				},
+				{
+					"name": "create",
+					"pattern": "SalesOrderSet/{objectId}/create",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"master",
+						"object",
+						"Create"
+					]
+				}
+			],
 			"targets": {
 				"master": {
 					"viewName": "Master",

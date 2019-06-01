@@ -202,6 +202,44 @@ sap.ui.define([
 				itemPosition : (oEvent.getParameter("listItem") || oEvent.getSource()).getBindingContext().getProperty("ItemPosition")
 			}, bReplace);
 
+		},
+
+		onDelete : function (oControlEvent) {
+			// delete the dragged item
+			var oItemToDelete = oControlEvent.getParameter("draggedControl");
+		
+			// delete the selected item from the list - if nothing selected, remove the first item
+			if (!oItemToDelete) {
+				var oList = this.byId("lineItemsList");
+				oItemToDelete = oList.getSelectedItem() || oList.getItems()[0];
+			}
+		
+			// delete the item after user confirmation
+			var sPath = oItemToDelete.getBindingContextPath(),
+				 sTitle = oItemToDelete.getBindingContext().getProperty("ProductID");
+			this._confirmDelete(sPath, sTitle);
+		},
+
+		_confirmDelete : function (sPath, sTitle) {
+		  var oResourceBundle = this.getResourceBundle();
+		  sap.ui.require(["sap/m/MessageBox"], function (MessageBox) {
+			 MessageBox.confirm(oResourceBundle.getText("deleteConfirmationMessage", [sTitle]), {
+				title: oResourceBundle.getText("confirmTitle"),
+				onClose: function (sAction) {
+				  if (sAction === sap.m.MessageBox.Action.OK) {
+					 this.getModel().remove(sPath, {
+						success : function () {
+						  MessageToast.show(oResourceBundle.getText("deleteSuccessMessage"));
+						},
+						error : function () {
+						  MessageBox.error(oResourceBundle.getText("deleteErrorMessage"));
+						}
+					 });
+				  }
+				}.bind(this)
+			 });
+		  }.bind(this));
 		}
+
 	});
 });

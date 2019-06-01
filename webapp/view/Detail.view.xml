@@ -23,6 +23,11 @@
 					<headerToolbar>
 						<Toolbar>
 							<Title id="lineItemsTitle" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
+							<ToolbarSpacer />
+									<Button
+										icon="sap-icon://add"
+										tooltip="{i18n>createButtonTooltip}"
+										press=".onCreate"/>
 						</Toolbar>
 					</headerToolbar>
 					<columns>

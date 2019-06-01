@@ -56,7 +56,9 @@
 					</columns>
 					<dragDropConfig>
 						<dnd:DragInfo sourceAggregation="items"/>
+						<dnd:DropInfo targetAggregation="items" drop =".dropItem"/>
 					</dragDropConfig>
+
 					<items>
 						<ColumnListItem selected="{= ${ItemPosition} === ${appView>/selectedItemId}}" type="Navigation">
 							<cells>

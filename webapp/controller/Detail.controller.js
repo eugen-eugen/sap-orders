@@ -239,6 +239,16 @@ sap.ui.define([
 				}.bind(this)
 			 });
 		  }.bind(this));
+		},
+		dropItem: function (dropInfoEvent){
+			var oItemToMove = dropInfoEvent.getParameter("draggedControl");
+			var oItemToShift = dropInfoEvent.getParameter("droppedControl");
+			if (!oItemToMove || !oItemToShift){
+				return;
+			}
+			var table = this.byId("lineItemsList");
+			table.removeItem(oItemToMove);
+			table.insertItem(oItemToMove, table.indexOfItem(oItemToShift));
 		}
 
 	});

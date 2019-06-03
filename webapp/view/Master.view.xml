@@ -16,7 +16,7 @@
 				updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
 				<infoToolbar>
 					<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press=".onOpenViewSettings">
-						<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
+						<Title id="masterPageTitle" text="{masterView>/filterBarLabel}"/>
 					</Toolbar>
 				</infoToolbar>
 				<headerToolbar>
@@ -33,7 +33,7 @@
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
-					<ObjectListItem type="Navigation" press=".onSelectionChange" title="{CustomerName}--{path: 'CreatedAt', formatter: '.formatter.dateValue'}"
+					<ObjectListItem type="Navigation" press=".onSelectionChange" title="{CustomerName}"
 						number="{path: 'NetAmount', formatter: '.formatter.currencyValue'}" numberUnit="{CurrencyCode}">
 						<ObjectAttribute text="{path: 'CreatedAt', type: 'sap.ui.model.type.Date',
 								formatOptions: {

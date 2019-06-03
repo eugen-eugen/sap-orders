@@ -5,8 +5,9 @@ sap.ui.define([
 	"sap/ui/test/actions/EnterText",
 	"sap/ui/test/matchers/AggregationLengthEquals",
 	"sap/ui/test/matchers/AggregationFilled",
-	"sap/ui/test/matchers/PropertyStrictEquals"
-], function(Opa5, Press, Common, EnterText, AggregationLengthEquals, AggregationFilled, PropertyStrictEquals) {
+	"sap/ui/test/matchers/PropertyStrictEquals",
+	"sap/m/ViewSettingsDialog"
+], function(Opa5, Press, Common, EnterText, AggregationLengthEquals, AggregationFilled, PropertyStrictEquals, ViewSettingsDialog) {
 	"use strict";
 
 	var sViewName = "Master",
@@ -20,7 +21,7 @@ sap.ui.define([
 			actions : {
 
 				iSortTheListOnName : function () {
-					return this.iChooseASorter("sortButton", "Sort By <CustomerName>");
+					return this.iChooseASorter("sortButton", "Sort By Client");
 				},
 				iSortTheListOnUnitNumber : function () {
 					return this.iChooseASorter("sortButton", "Sort By <NetAmount>");
@@ -35,8 +36,9 @@ sap.ui.define([
 				},
 
 				iRemoveListGrouping : function () {
-					return this.iChooseASorter("groupButton", "None");
+					return this.iChooseASorter("groupButton", new sap.m.ViewSettingsDialog()._rb.getText('VIEWSETTINGS_NONE_ITEM'));
 				},
+				
 				iOpenViewSettingsDialog : function () {
 					return this.waitFor({
 						id : "filterButton",
@@ -296,12 +298,11 @@ sap.ui.define([
 
 				theListHeaderDisplaysZeroHits : function () {
 					return this.waitFor({
+						id : "list",
 						viewName : sViewName,
-						id: "masterPageTitle",
-						autoWait: false,
-						matchers: new PropertyStrictEquals({name : "text", value : "<SalesOrderSet> (0)"}),
-						success: function () {
-							Opa5.assert.ok(true, "The list header displays zero hits");
+						success : function (oList) {
+							Opa5.assert.strictEqual  (0, oList.getItems().length );                         
+							
 						},
 						errorMessage: "The list header still has items"
 					});
@@ -452,15 +453,8 @@ sap.ui.define([
 						viewName : sViewName,
 						success : function (oList) {
 							var iExpectedLength = oList.getBinding("items").getLength();
-							this.waitFor({
-								id : "masterPageTitle",
-								viewName : sViewName,
-								matchers : new PropertyStrictEquals({name : "text", value : "<SalesOrderSet> (" + iExpectedLength + ")"}),
-								success : function () {
-									Opa5.assert.ok(true, "The master page header displays " + iExpectedLength + " items");
-								},
-								errorMessage : "The  master page header does not display " + iExpectedLength + " items."
-							});
+							Opa5.assert.strictEqual  (iExpectedLength, oList.getItems().length );                         
+							
 						},
 						errorMessage : "Header does not display the number of items in the list"
 					});

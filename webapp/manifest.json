@@ -79,9 +79,11 @@
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true,
+				"preload": false,
 				"settings": {
-					"defaultBindingMode": "TwoWay"
+					"defaultBindingMode": "TwoWay",
+					"useBatch": false,
+					"defaultOperationMode": "Server"
 				}
 			},
 			"m1": {
@@ -107,41 +109,25 @@
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "master",
-					"target": "master"
-				},
-				{
-					"pattern": "SalesOrderSet/{objectId}",
-					"name": "object",
-					"target": [
-						"master",
-						"object"
-					]
-				},
-				{
-					"name": "Info",
-					"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
-					"target": [
-						"master",
-						"object",
-						"Info"
-					]
-				},
-				{
-					"name": "create",
-					"pattern": "SalesOrderSet/{objectId}/create",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"master",
-						"object",
-						"Create"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": "master"
+			}, {
+				"pattern": "SalesOrderSet/{objectId}",
+				"name": "object",
+				"target": ["master", "object"]
+			}, {
+				"name": "Info",
+				"pattern": "SalesOrderSet/{objectId}/Item/{itemPosition}",
+				"target": ["master", "object", "Info"]
+			}, {
+				"name": "create",
+				"pattern": "SalesOrderSet/{objectId}/create",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["master", "object", "Create"]
+			}],
 			"targets": {
 				"master": {
 					"viewName": "Master",

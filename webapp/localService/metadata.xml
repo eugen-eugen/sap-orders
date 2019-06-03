@@ -1,7 +1,8 @@
-<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
-	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
 	<edmx:DataServices m:DataServiceVersion="2.0">
-		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="GWSAMPLE_BASIC" xml:lang="de" sap:schema-version="1">
+		<Schema Namespace="GWSAMPLE_BASIC" xml:lang="de" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
 			<EntityType Name="BusinessPartner" sap:content-version="1">
 				<Key><PropertyRef Name="BusinessPartnerID"/></Key><Property Name="Address" Type="GWSAMPLE_BASIC.CT_Address" Nullable="false"/><Property Name="BusinessPartnerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Geschäftspartner-ID" sap:creatable="false"
 					sap:updatable="false"/><Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Firma"/><Property Name="WebAddress" Type="Edm.String" sap:sortable="false" sap:filterable="false" sap:semantics="url"/><Property Name="EmailAddress" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="E-Mail" sap:semantics="email"/><Property Name="PhoneNumber" Type="Edm.String" MaxLength="30" sap:label="Telefonnr." sap:semantics="tel"/><Property Name="FaxNumber" Type="Edm.String" MaxLength="30"/><Property Name="LegalForm" Type="Edm.String" MaxLength="10" sap:label="Rechtsform"/><Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Währungscode" sap:semantics="currency-code"/><Property Name="BusinessPartnerRole" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="GeschPartnRolle"/><Property Name="CreatedAt" Type="Edm.DateTime" Precision="7" sap:label="Zeitstempel" sap:creatable="false" sap:updatable="false"/><Property Name="ChangedAt" Type="Edm.DateTime" Precision="7" ConcurrencyMode="Fixed" sap:label="Zeitstempel" sap:creatable="false"
@@ -263,6 +264,10 @@
 					sap:action-for="GWSAMPLE_BASIC.SalesOrder"><Parameter Name="SalesOrderID" Type="Edm.String" Mode="In" MaxLength="10"/></FunctionImport>
 				<FunctionImport Name="SalesOrder_GoodsIssueCreated" ReturnType="GWSAMPLE_BASIC.SalesOrder" EntitySet="SalesOrderSet" m:HttpMethod="POST"
 					sap:action-for="GWSAMPLE_BASIC.SalesOrder"><Parameter Name="SalesOrderID" Type="Edm.String" Mode="In" MaxLength="10"/></FunctionImport>
-			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./iwbep/GWSAMPLE_BASIC/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./iwbep/GWSAMPLE_BASIC/$metadata"/></Schema>
+			</EntityContainer><atom:link rel="self"
+				href="https://webidecp-p2000978408trial.dispatcher.hanatrial.ondemand.com/destinations/ES5/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
+				href="https://webidecp-p2000978408trial.dispatcher.hanatrial.ondemand.com/destinations/ES5/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

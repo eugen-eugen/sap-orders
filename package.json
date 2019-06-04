@@ -1,9 +1,22 @@
 {
-  "name": "Orders",
-  "version": "0.0.1",
-  "description": "",
-  "private": true,
-  "devDependencies": {
-    "@sap/grunt-sapui5-bestpractice-build": "1.3.65"
-  }
+	"name": "Orders",
+	"version": "0.0.1",
+	"description": "",
+	"private": true,
+	"scripts": {
+		"start": "ui5 serve",
+		"karma": "karma start",
+		"karma-ci": "karma start karma-ci.conf.js",
+		"watch": "npm run karma"
+	},
+	"dependencies": {
+		"sap": "file:../../../Program Files/Node/node_modules/@sap/sap"
+	},
+	"devDependencies": {
+		"@ui5/cli": "^1.2.0",
+		"karma": "^4.0.1",
+		"karma-chrome-launcher": "^2.2.0",
+		"karma-coverage": "^1.1.2",
+		"karma-ui5": "^1.0.0"
+	}
 }
